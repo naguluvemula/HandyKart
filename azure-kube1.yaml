@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: handykarttest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: handykarttest
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: handykarttest
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: handykarttest
+        image: myterraformacr.azurecr.io/naguluvemula/handykart:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: "handykarttest"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: handykarttest
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+  selector:
+    app: handykarttest
