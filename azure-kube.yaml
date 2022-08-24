@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: handykartreacttest1
+  name: handykarttest
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: handykartreacttest1
+      app: handykarttest
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,12 +15,12 @@ spec:
   template:
     metadata:
       labels:
-        app: handykartreacttest1
+        app: handykarttest
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: handykartreacttest1
+      - name: handykarttest
         image: myterraformacr.azurecr.io/naguluvemula/handykart:latest
         ports:
         - containerPort: 3000
@@ -31,15 +31,15 @@ spec:
             cpu: 500m
         env:
         - name: REDIS
-          value: "handykartreacttest1"
+          value: "handykarttest"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: handykartreacttest1
+  name: handykarttest
 spec:
   type: LoadBalancer
   ports:
   - port: 3000
   selector:
-    app: handykartreacttest1
+    app: handykarttest
