@@ -23,7 +23,7 @@ spec:
       - name: handykartreacttest1
         image: myterraformacr.azurecr.io/quarkus/handykartreacttest1:latest
         ports:
-        - containerPort: 3001
+        - containerPort: 3000
         resources:
           requests:
             cpu: 250m
@@ -40,6 +40,6 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 3001
+  - port: 3000
   selector:
     app: handykartreacttest1
