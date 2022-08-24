@@ -21,7 +21,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: handykartreacttest1
-        image: myterraformacr.azurecr.io/quarkus/handykartreacttest1:latest
+        image: myterraformacr.azurecr.io/naguluvemula/handykart:latest
         ports:
         - containerPort: 3000
         resources:
